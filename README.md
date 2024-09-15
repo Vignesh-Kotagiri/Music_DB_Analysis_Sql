@@ -1,53 +1,35 @@
-Music Database Analysis
-This repository contains a collection of SQL queries designed to analyze a music database. The goal is to extract insightful information about employees, customers, sales, and music tracks from the database.
+## Music Database Analysis
+Overview: This repository contains a collection of SQL queries designed to analyze a music database. The goal is to extract insightful information about employees, customers, sales, and music tracks from the database.
 
-Project Breakdown
-Queries and Results
-Senior Most Employee
+Project Overview
 
-Query:
-sql
-Copy code
-SELECT * FROM employee ORDER BY levels DESC LIMIT 1;
+Senior Most Employee:
+Query:SELECT * FROM employee ORDER BY levels DESC LIMIT 1;.
 Description: Retrieves the employee with the highest level.
-Country with Most Number of Invoices
 
-Query:
-sql
-Copy code
-SELECT billing_country, COUNT(*) FROM invoice GROUP BY billing_country ORDER BY COUNT(*) DESC LIMIT 1;
+Country with Most Number of Invoices:
+Query:SELECT billing_country, COUNT(*) FROM invoice GROUP BY billing_country ORDER BY COUNT(*) DESC LIMIT 1;.
 Description: Identifies the country with the most invoices.
-Top 3 Invoice Values
 
-Query:
-sql
-Copy code
-SELECT total FROM invoice ORDER BY total DESC LIMIT 3;
+Top 3 Invoice Values:
+Query:SELECT total FROM invoice ORDER BY total DESC LIMIT 3;.
 Description: Lists the top 3 highest invoice totals.
-City with Highest Sales
 
-Query:
-sql
-Copy code
-SELECT billing_city, SUM(total) FROM invoice GROUP BY billing_city ORDER BY SUM(total) DESC LIMIT 1;
+City with Highest Sales:
+Query:SELECT billing_city, SUM(total) FROM invoice GROUP BY billing_city ORDER BY SUM(total) DESC LIMIT 1;.
 Description: Finds the city with the highest total sales.
-Best Customer (Who Made Maximum Total Purchases)
 
-Query:
-sql
-Copy code
-SELECT customer.customer_id, customer.first_name, customer.last_name, SUM(invoice.total) AS total
+Best Customer (Who Made Maximum Total Purchases):
+Query:SELECT customer.customer_id, customer.first_name, customer.last_name, SUM(invoice.total) AS total
 FROM customer
 JOIN invoice ON invoice.customer_id = customer.customer_id
 GROUP BY customer.customer_id
 ORDER BY total DESC
-LIMIT 1;
+LIMIT 1;.
 Description: Identifies the customer who has spent the most.
-Rock Music Listeners
 
+Rock Music Listeners:
 Query:
-sql
-Copy code
 SELECT DISTINCT email, first_name, last_name
 FROM customer
 JOIN invoice ON invoice.customer_id = customer.customer_id
@@ -57,13 +39,11 @@ WHERE track_id IN (
   JOIN genre ON genre.genre_id = track.genre_id
   WHERE genre.name ILIKE 'rock'
 )
-ORDER BY email;
+ORDER BY email;.
 Description: Lists all rock music listeners with their email, first name, and last name, ordered alphabetically.
-Artists Who Wrote the Most Rock Music
 
+Artists Who Wrote the Most Rock Music:
 Query:
-sql
-Copy code
 SELECT artist.artist_id, artist.name, COUNT(artist.artist_id) AS no_of_songs
 FROM artist
 JOIN album ON album.artist_id = artist.artist_id
@@ -72,20 +52,18 @@ JOIN genre ON genre.genre_id = track.genre_id
 WHERE genre.name ILIKE 'rock'
 GROUP BY artist.artist_id
 ORDER BY no_of_songs DESC
-LIMIT 10;
+LIMIT 10;.
 Description: Finds the top 10 artists who have written the most rock songs.
-Songs with Length Greater Than Average
 
+Songs with Length Greater Than Average:
 Query:
-sql
-Copy code
 SELECT track.name, milliseconds FROM track
 WHERE milliseconds > (SELECT AVG(milliseconds) FROM track)
-ORDER BY milliseconds DESC;
+ORDER BY milliseconds DESC;.
 Description: Lists songs with lengths greater than the average song length.
-Setup and Execution
-Clone this repository to your local machine:
 
+Setup and Execution:
+Clone this repository to your local machine:
 bash
 Copy code
 git clone https://github.com/your-username/music-database-analysis.git

@@ -4,8 +4,9 @@ This repository contains a collection of SQL queries designed to analyze a music
 
 ## Queries and Results
 
-Senior Most Employee
-Query:SELECT * FROM employee ORDER BY levels DESC LIMIT 1;
+## Senior Most Employee
+**Query**:
+SELECT * FROM employee ORDER BY levels DESC LIMIT 1;
 Description: Retrieves the employee with the highest level.
 
 Country with Most Number of Invoices
